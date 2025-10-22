@@ -1,43 +1,127 @@
-// 通用工具函数
-const Utils = {
-    // 格式化时间
-    formatTime(date) {
-        return date.toLocaleString('zh-CN');
-    },
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potato管理工具 - 专业多功能自动化平台</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* CSS样式将在下一部分 */
+    </style>
+</head>
+<body>
+    <!-- 登录界面 -->
+    <div id="loginPanel" class="panel">
+        <div class="login-container">
+            <div class="login-header">
+                <h1><i class="fas fa-potato"></i> Potato管理工具</h1>
+                <p>专业多功能自动化管理平台</p>
+            </div>
+            <div class="login-form">
+                <div class="form-group">
+                    <label>用户名:</label>
+                    <input type="text" id="username" placeholder="请输入用户名">
+                </div>
+                <div class="form-group">
+                    <label>密码:</label>
+                    <input type="password" id="password" placeholder="请输入密码">
+                </div>
+                <button id="loginBtn" class="btn-primary">登录</button>
+                <button id="registerBtn" class="btn-secondary">注册账号</button>
+                <div class="login-links">
+                    <a href="#" id="forgotPassword">忘记密码?</a>
+                    <a href="#" id="importAccounts">导入账号</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    // 生成随机延迟
-    randomDelay(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    },
+    <!-- 主应用界面 -->
+    <div id="mainApp" class="hidden">
+        <!-- 顶部导航 -->
+        <header class="app-header">
+            <div class="header-left">
+                <h1><i class="fas fa-potato"></i> Potato Manager</h1>
+            </div>
+            <div class="header-center">
+                <div class="status-indicators">
+                    <span class="status-item"><i class="fas fa-circle online"></i> 在线</span>
+                    <span class="status-item"><i class="fas fa-users"></i> 账号: <span id="accountCount">0</span></span>
+                    <span class="status-item"><i class="fas fa-bolt"></i> 代理: <span id="proxyStatus">未设置</span></span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button id="settingsBtn" class="btn-icon" title="设置"><i class="fas fa-cog"></i></button>
+                <button id="logoutBtn" class="btn-secondary">退出</button>
+            </div>
+        </header>
 
-    // 数据验证
-    validatePhone(phone) {
-        return /^\+?[\d\s\-\(\)]+$/.test(phone);
-    },
+        <!-- 侧边栏和主内容区域 -->
+        <!-- 这部分代码较长，将在后续部分提供 -->
+    </div>5
 
-    // 导出数据
-    exportData(data, filename) {
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        a.click();
-        URL.revokeObjectURL(url);
-    },
+    <script>
+        // JavaScript代码将在最后部分提供
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potato管理工具</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+        .hidden { display: none; }
+        .panel { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .login-container { background: white; padding: 40px; border-radius: 15px; color: #333; max-width: 400px; width: 100%; }
+        .login-header { text-align: center; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; }
+        .btn-primary { background: #667eea; color: white; border: none; padding: 12px; border-radius: 5px; width: 100%; cursor: pointer; }
+        .btn-secondary { background: #e2e8f0; color: #333; border: none; padding: 12px; border-radius: 5px; width: 100%; cursor: pointer; margin-top: 10px; }
+        #mainApp { display: flex; flex-direction: column; height: 100vh; }
+        .app-header { background: white; color: #333; padding: 15px; display: flex; justify-content: space-between; }
+        .app-container { display: flex; flex: 1; }
+        .sidebar { width: 250px; background: #2d3748; color: white; padding: 20px; }
+        .main-content { flex: 1; padding: 20px; background: #f7fafc; color: #333; }
+        .card { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .tab-content { display: none; }
+        .active { display: block; }
+        .sidebar a { color: #cbd5e0; text-decoration: none; display: block; padding: 10px; }
+        .sidebar a.active { background: #4a5568; }
+    </style>
+</head>
+<body>
+    <div id="loginPanel" class="panel">
+        <div class="login-container">
+            <div class="login-header">
+                <h1><i class="fas fa-potato"></i> Potato管理工具</h1>
+                <p>专业多功能自动化平台</p>
+            </div>
+            <div class="login-form">
+                <div class="form-group">
+                    <label>用户名:</label>
+                    <input type="text" id="username" placeholder="请输入用户名">
+                </div>
+                <div class="form-group">
+                    <label>密码:</label>
+                    <input type="password" id="password" placeholder="请输入密码">
+                </div>
+                <button id="loginBtn" class="btn-primary">登录</button>
+                <button id="registerBtn" class="btn-secondary">注册账号</button>
+            </div>
+        </div>
+    </div>
 
-    // 导入数据
-    importData(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                try {
-                    resolve(JSON.parse(e.target.result));
-                } catch (error) {
-                    reject(error);
-                }
-            };
-            reader.readAsText(file);
-        });
-    }
-};
+    <div id="mainApp" class="hidden">
+        <header class="app-header">
+            <h1><i class="fas fa-potato"></i> Potato Manager</h1>
+            <div>
+                <button id="settingsBtn"><i class="
+                                             
